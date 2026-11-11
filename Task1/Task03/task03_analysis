@@ -1,0 +1,86 @@
+
+# Task 03 – Default Arguments and Function Overloading
+
+## Aim
+To understand default arguments and function overloading in C++.
+
+## 1. Function Overloading
+Function overloading allows multiple functions to have the same name with different parameter lists.
+
+In this program, charge() is overloaded for:
+- Integer weight in grams.
+- Double weight in kilograms.
+- Parcel objects.
+
+## 2. Default Arguments
+Default arguments provide predefined values when the caller does not supply all arguments.
+
+Example:
+
+double charge(double kg, bool express = false,
+              bool insured = false)
+
+Here:
+- express defaults to false.
+- insured defaults to false.
+
+## 3. Ambiguous Function Call
+The original design contains:
+
+charge(double weight);
+charge(double weight, bool express);
+charge(double weight, bool express = false,
+       bool insured = false);
+
+Calling charge(2.0) can match all three functions because the extra parameters have defaults in the third function.
+
+This creates ambiguity because the compiler cannot select one unique best overload.
+
+The redesigned program removes the conflicting overloads.
+
+## 4. Overload Resolution
+The compiler considers:
+1. Exact match.
+2. Promotion.
+3. Standard conversion.
+
+An exact match is preferred over a conversion.
+
+For example:
+- charge(2) selects the integer overload.
+- charge(2.0) selects the double overload.
+- charge(2.0f) converts float to double.
+
+## 5. Why Default Arguments Are Given from the Right
+Default arguments must be specified from right to left.
+
+Correct:
+void display(int a, int b = 10, int c = 20);
+
+Incorrect:
+void display(int a = 10, int b, int c = 20);
+
+A parameter without a default cannot follow one with a default in the same parameter list.
+
+## 6. Alternative Concept
+A single Parcel structure can hold all delivery options.
+
+The program can accept one Parcel object containing weight, express and insurance information.
+
+This makes it easier to add new options without creating many overloaded functions.
+
+## 7. Complexity Analysis
+
+Overload resolution:
+Compile-time operation; no runtime overload-selection cost.
+
+Charge calculation:
+Time Complexity: O(1)
+
+Additional parameter space:
+O(1) for the supplied scalar arguments.
+
+Passing a Parcel by const reference avoids copying the entire object.
+
+## Result
+The program demonstrates default arguments and function overloading. The redesigned functions avoid ambiguous calls and support different weight types and Parcel objects.
