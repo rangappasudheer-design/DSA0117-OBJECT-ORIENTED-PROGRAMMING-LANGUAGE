@@ -1,0 +1,91 @@
+TASK 10 – COMPARE EXPECTATIONS WITH EXECUTION
+
+1. Aim
+
+To compare floating-point and integer-paise calculations for different numbers of metro journeys and evaluate the suitability of C++ data types for large network totals.
+
+2. Test Assumption
+
+For this experiment, each journey is assumed to cost Rs 36.00, which represents the Outer-zone peak fare.
+
+- Fare in rupees: 36.00
+- Fare in paise: 3600
+- Journey counts: 20,000, 500,000 and 3,000,000
+
+This is a controlled test assumption. Actual journey fares may vary by zone and time.
+
+3. Expected and Calculated Results
+
+Journeys| Integer-paise total| Rupee total
+20,000| 72,000,000 paise| Rs 720,000.00
+500,000| 1,800,000,000 paise| Rs 18,000,000.00
+3,000,000| 10,800,000,000 paise| Rs 108,000,000.00
+
+For these whole-rupee fares, the mathematical totals from double and integer-paise calculations agree. The difference is Rs 0.00 in this experiment.
+
+4. Does int Overflow?
+
+A typical 32-bit signed int has a maximum value of 2,147,483,647.
+
+- 20,000 journeys: 72,000,000 paise – no overflow.
+- 500,000 journeys: 1,800,000,000 paise – no overflow.
+- 3,000,000 journeys: 10,800,000,000 paise – exceeds the int limit.
+
+Therefore, an int is not suitable for storing the total in paise for the whole network.
+
+The program uses long long to store the total safely. It checks the limit instead of deliberately performing an overflowing signed-int calculation.
+
+5. Comparison of Data Types
+
+Type| Typical size| Result at 3 million journeys
+int| 4 bytes| Cannot safely store 10.8 billion paise
+long long| 8 bytes| Stores the total safely
+double| 8 bytes| Stores this test total, but fractional values may have precision errors
+
+6. Floating-Point Difference
+
+A double stores many decimal fractions as approximate binary values. For example, 0.1 cannot be represented exactly in binary floating-point.
+
+Repeated addition can therefore produce a small rounding difference.
+
+Integer paise avoids this problem for money calculations when all amounts are represented as whole paise.
+
+7. Compiler Warnings
+
+Compile using:
+
+g++ -std=c++17 -Wall -Wextra -pedantic main.cpp -o task10
+
+These options request useful compiler diagnostics:
+
+- "-Wall": Enables many common warning checks.
+- "-Wextra": Enables additional warning checks.
+- "-pedantic": Requests diagnostics for non-standard language extensions.
+
+The supplied program is intended to compile without warnings under a conforming C++17 compiler. Actual warnings must be recorded from the student's own compiler output.
+
+Examples of possible warnings in other code include:
+
+- Comparing signed and unsigned integers.
+- Unused variables.
+- Converting a large integer to a smaller type.
+- Potentially suspicious expressions.
+
+8. Alternative Concept and Complexity Analysis
+
+If the total were accumulated using different types:
+
+- "int": The total in paise exceeds its typical 32-bit signed range at 3 million journeys.
+- "long long": Can safely store the total for this experiment.
+- "double": Can represent the large test total, but decimal fractions may be approximate.
+
+For n journeys:
+
+- Time complexity: O(n) for accumulating n individual fares.
+- Space complexity: O(1) for the running total.
+
+Each addition takes O(1) time. The three numeric types use constant memory; their typical sizes are 4, 8 and 8 bytes respectively.
+
+9. Conclusion
+
+The experiment shows that int is unsuitable for the whole-network total when money is stored in paise. Long long provides a safer integer representation, while double may introduce rounding errors for fractional rupee values. Therefore, integer paise with long long is recommended for the metro fare system.
