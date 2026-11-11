@@ -1,0 +1,16 @@
+Passenger: Sudheer
+Category: Student
+
+Initial Smart Card Balance: Rs 100.00
+
+Journey 1 Fare: Rs 10.00
+Journey Successful
+Remaining Balance: Rs 90.00
+
+Journey 2 Fare: Rs 36.00
+Journey Successful
+Remaining Balance: Rs 54.00
+
+Journey 3 Fare: Rs 20.00
+Journey Denied: Low Balance
+Remaining Balance: Rs 54.00
