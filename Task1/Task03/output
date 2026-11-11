@@ -1,0 +1,8 @@
+Courier Charge Calculator
+
+charge(500): 25
+charge(2): 0.1
+charge(2.0): 100
+charge(2.0f): 100
+charge(2.0, true): 130
+charge(Parcel): 150
