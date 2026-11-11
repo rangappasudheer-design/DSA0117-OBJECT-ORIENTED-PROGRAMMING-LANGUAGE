@@ -1,0 +1,71 @@
+
+# Task 04 – Savings Account Mini-Statement
+
+## Aim
+To create a SavingsAccount class using an array to store the last 10 transactions.
+
+## 1. Class Specification
+The SavingsAccount class contains private members:
+- accountNumber
+- balance
+- transactions[10]
+- count
+
+Public member functions:
+- deposit()
+- withdraw()
+- miniStatement()
+- displayBalance()
+
+## 2. Access Specifiers
+Private members cannot be accessed directly outside the class.
+
+Public functions provide controlled access to the account information.
+
+This protects the account data from unwanted modification.
+
+## 3. Member Functions
+The deposit() function increases the account balance.
+
+The withdraw() function decreases the balance if sufficient funds are available.
+
+The miniStatement() function displays the stored transactions.
+
+Some functions are defined inside the class, while others are defined outside using the scope resolution operator (::).
+
+## 4. Handling the 11th Transaction
+When the transaction array is full, the oldest transaction is removed.
+
+The remaining transactions are shifted one position to the left.
+
+The new transaction is stored at the last position.
+
+## 5. Alternative Concept
+A circular buffer can be used instead of shifting the array.
+
+A circular buffer maintains a starting index and replaces the oldest transaction when full.
+
+This avoids shifting all elements.
+
+A std::deque can also use push_back() and pop_front().
+
+## 6. Complexity Analysis
+
+Fixed array with shifting:
+Insertion when full: O(k), where k is the number of stored transactions.
+
+Circular buffer:
+Insertion: O(1).
+
+Deque:
+Insertion and removal at opposite ends: O(1) amortized for push_back and O(1) for pop_front.
+
+Space complexity:
+O(10) for the fixed transaction array.
+O(10) for a bounded circular buffer or deque holding ten transactions.
+
+## 7. Design Decision
+For storing the last 50 transactions, a circular buffer is a suitable design because it avoids shifting the stored transactions each time a new transaction arrives.
+
+## Result
+The SavingsAccount class successfully demonstrates encapsulation, arrays inside a class, member functions and transaction management.
