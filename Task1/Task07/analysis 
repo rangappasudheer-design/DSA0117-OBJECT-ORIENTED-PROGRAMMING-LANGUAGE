@@ -1,0 +1,151 @@
+
+# Task07 – Design Challenge
+## Improving Safe Access to Student Marks
+
+### 1. Selected Program
+Task02 – Returning a Reference to the Highest Mark.
+
+### 2. Problem Statement
+The original program returns a reference to the highest
+mark in an array. Returning references can be useful
+because they avoid copying data and allow direct
+modification.
+
+However, returning a reference to a local variable
+causes a dangling reference. Also, vector operations
+that reallocate storage can invalidate references
+to vector elements.
+
+### 3. Design Objective
+The objective is to improve the program by:
+- Avoiding dangling references.
+- Handling empty collections.
+- Supporting vector growth safely.
+- Finding the highest mark.
+- Modifying the highest mark.
+- Avoiding unnecessary copying.
+
+### 4. Proposed Solution
+The revised program uses an index-based approach.
+
+The highestMarkIndex() function returns the position
+of the highest mark instead of returning a reference.
+
+The improveHighestMark() function uses this index
+to update the selected mark.
+
+The displayMarks() function accepts a const reference
+to avoid copying the vector.
+
+### 5. Revised Design
+
+Input: Student marks stored in a vector.
+
+Step 1: Check whether the vector is empty.
+
+Step 2: If empty, return -1.
+
+Step 3: Assume the first element is the highest.
+
+Step 4: Compare every remaining mark.
+
+Step 5: Store the index of the highest mark.
+
+Step 6: Return the index.
+
+Step 7: Use the index to add the bonus.
+
+Step 8: Display the updated marks.
+
+### 6. Design Diagram
+
+Student Marks
+      |
+      v
+highestMarkIndex()
+      |
+      v
+Find Highest Mark
+      |
+      v
+Return Index
+      |
+      v
+improveHighestMark()
+      |
+      v
+Update Highest Mark
+      |
+      v
+Display Updated Marks
+
+### 7. Test Cases
+
+Test 1:
+Input: 75, 88, 92, 81, 85
+Highest mark: 92
+Index: 2
+
+Test 2:
+Bonus: 2
+Updated highest mark: 94
+
+Test 3:
+Add a new mark: 95
+New highest mark: 95
+
+Test 4:
+Empty vector
+Expected result: No marks available.
+
+### 8. Comparison with Original Design
+
+Original design:
+- Returns a reference to the highest mark.
+- Can directly modify the selected element.
+- Returning a reference to a local variable is unsafe.
+- Vector reallocation can invalidate element references.
+
+Improved design:
+- Returns an integer index.
+- Avoids storing a potentially invalid element reference.
+- Handles an empty vector.
+- Supports vector growth.
+- Provides controlled modification.
+
+### 9. Complexity Analysis
+
+Finding the highest mark:
+Time complexity: O(n)
+Space complexity: O(1)
+
+Displaying marks:
+Time complexity: O(n)
+Space complexity: O(1)
+
+Updating the highest mark:
+Time complexity: O(n), including the search.
+Space complexity: O(1).
+
+### 10. Limitations and Future Improvements
+
+The index must be recalculated after elements are inserted,
+removed or reordered if the program needs the current
+highest mark.
+
+Future improvements could include:
+- Student names and registration numbers.
+- Input validation.
+- Multiple student records.
+- Sorting and ranking.
+- File storage.
+
+### 11. Conclusion
+
+The revised program improves the original Task02 design
+by using an index instead of returning a reference to
+a vector element.
+
+It avoids dangling references in the revised interface,
+handles empty vectors and continues to work after vector
+growth. The test cases demonstrate the improved design.
