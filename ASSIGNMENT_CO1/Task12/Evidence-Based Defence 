@@ -1,0 +1,95 @@
+TASK 12 – RE-EVALUATE AND ADAPT THE DESIGN
+
+A. Impact Analysis
+
+The metro system introduces a fourth zone, a weekend discount and a monthly pass.
+
+The following components require modification:
+
+1. Zone enumeration: Add Airport.
+2. Fare table: Add Airport fare of Rs 60 (6000 paise).
+3. Fare calculation: Add a 10% weekend discount.
+4. Peak-hour calculation: Retain the existing 20% surcharge.
+5. SmartCard class: Allow journeys covered by a monthly pass.
+6. MonthlyPass class: Store two selected zones and check whether a journey is covered.
+
+B. Evaluation of Original Design
+
+The original three-zone design cannot directly support all the new requirements without modification.
+
+The original switch or fare-selection logic must support Airport. The fare calculation must also distinguish weekend journeys from weekday peak journeys.
+
+The SmartCard class can be retained because its responsibility of protecting the card balance remains unchanged.
+
+A separate MonthlyPass class is recommended because pass eligibility is different from ordinary fare calculation.
+
+Worked examples
+
+Example| Calculation| Result
+Airport weekday off-peak| Rs 60| Rs 60
+Inner weekend| Rs 10 - 10%| Rs 9
+Outer weekday peak| Rs 30 + 20%| Rs 36
+Middle weekend peak| Rs 20 - 10%| Rs 18
+
+The weekend discount does not combine with the peak surcharge.
+
+C. Adaptation or Redesign
+
+The original design is modified rather than completely replaced.
+
+The revised design includes:
+
+- "enum class Zone" with four zones.
+- A fare table containing four base fares.
+- A separate weekend-discount rule.
+- A peak-hour rule for weekdays.
+- A "SmartCard" class for balance management.
+- A "MonthlyPass" class for two selected zones.
+
+The monthly pass allows unlimited journeys in its two selected zones in this simplified implementation. Journeys outside those zones are charged normally.
+
+D. Evidence-Based Defence
+
+The program uses the following test examples:
+
+Test| Expected result
+Inner weekend| Rs 9
+Outer weekday peak| Rs 36
+Middle journey with valid pass| Free
+Airport weekday off-peak| Rs 60
+Airport journey with only Rs 55 remaining| Denied
+
+The program starts with Rs 100.
+
+- After the Inner weekend journey: Rs 91.
+- After the Outer peak journey: Rs 55.
+- The Middle journey is covered by the monthly pass, so the balance remains Rs 55.
+- The Airport journey is denied because deducting Rs 60 would leave less than Rs 50.
+
+This demonstrates that the minimum-balance rule is still protected.
+
+Complexity Analysis
+
+Let n represent the number of journeys.
+
+Operation| Time complexity
+Fare lookup| O(1)
+Peak-hour check| O(1)
+Weekend discount calculation| O(1)
+Monthly-pass zone check| O(1)
+Smart-card balance check| O(1)
+Processing n journeys| O(n)
+
+The fare table and monthly-pass data use O(1) space because they store a fixed number of values.
+
+Final Decision
+
+I recommend modifying the original design.
+
+The revised design retains the useful SmartCard class and integer-paise calculations while adding the Airport zone, weekend discount and MonthlyPass class.
+
+This approach avoids unnecessary redesign, keeps the code organised and supports the changed requirements. A production system would also need pass-expiry validation, secure transactions and persistent card records.
+
+Conclusion
+
+The modified design supports four zones, applies the weekend discount without combining it with the peak surcharge, and provides unlimited journeys in two selected zones through a monthly pass. It preserves the minimum-balance rule for journeys paid using the stored-value card.
