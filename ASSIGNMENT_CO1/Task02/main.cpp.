@@ -1,0 +1,89 @@
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+// Defining fare constants using constexpr
+constexpr long long INNER_FARE = 1000;
+constexpr long long MIDDLE_FARE = 2000;
+constexpr long long OUTER_FARE = 3000;
+
+constexpr int PEAK_SURCHARGE_PERCENT = 20;
+constexpr long long MIN_BALANCE_PAISE = 5000;
+
+// Defining metro zones using enum class
+enum class Zone
+{
+    Inner,
+    Middle,
+    Outer
+};
+
+// Function to get base fare
+long long getBaseFare(Zone zone)
+{
+    switch (zone)
+    {
+        case Zone::Inner:
+            return INNER_FARE;
+
+        case Zone::Middle:
+            return MIDDLE_FARE;
+
+        case Zone::Outer:
+            return OUTER_FARE;
+    }
+
+    return 0;
+}
+
+// Function to print money
+void printMoney(long long paise)
+{
+    cout << "Rs " << paise / 100 << "."
+         << setw(2) << setfill('0')
+         << paise % 100 << setfill(' ');
+}
+
+int main()
+{
+    Zone selectedZone = Zone::Outer;
+    bool peakHour = true;
+
+    long long baseFare = getBaseFare(selectedZone);
+
+    long long surcharge = 0;
+
+    if (peakHour)
+    {
+        surcharge =
+            baseFare * PEAK_SURCHARGE_PERCENT / 100;
+    }
+
+    long long finalFare = baseFare + surcharge;
+
+    cout << "Metro Smart-Card Fare System" << endl;
+
+    cout << "Zone: Outer" << endl;
+
+    cout << "Peak hour: "
+         << (peakHour ? "Yes" : "No") << endl;
+
+    cout << "Base Fare: ";
+    printMoney(baseFare);
+    cout << endl;
+
+    cout << "Peak Surcharge: ";
+    printMoney(surcharge);
+    cout << endl;
+
+    cout << "Final Fare: ";
+    printMoney(finalFare);
+    cout << endl;
+
+    cout << "Minimum Balance: ";
+    printMoney(MIN_BALANCE_PAISE);
+    cout << endl;
+
+    return 0;
+}
