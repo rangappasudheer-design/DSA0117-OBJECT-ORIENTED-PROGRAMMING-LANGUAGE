@@ -1,0 +1,71 @@
+TASK 09 – IMPLEMENT AND TEST THE FARE LOGIC
+
+1. Aim
+
+To implement the metro smart-card fare calculation using C++ and test normal journeys, peak hours, boundary conditions, balance limits and invalid inputs.
+
+2. Fare Rules
+
+Zone| Base Fare
+Inner| Rs 10
+Middle| Rs 20
+Outer| Rs 30
+
+- Peak surcharge: 20%.
+- Morning peak: 8 AM to before 10 AM.
+- Evening peak: 5 PM to before 8 PM.
+- Minimum remaining balance: Rs 50.
+
+3. Data Types Used
+
+- enum class: Represents metro zones.
+- int: Stores hours and percentages.
+- long long: Stores money in paise.
+- bool: Checks peak hours and travel permission.
+- string: Stores test descriptions.
+
+4. Peak-Hour Expression
+
+(hour >= 8 && hour < 10) ||
+(hour >= 17 && hour < 20)
+
+This expression correctly identifies both peak periods.
+
+5. Test Cases
+
+Test| Expected result
+Inner off-peak| Rs 10
+Inner peak| Rs 12
+Middle off-peak| Rs 20
+Middle peak| Rs 24
+Outer off-peak| Rs 30
+Outer peak| Rs 36
+8:00 AM| Peak
+10:00 AM| Off-peak
+5:00 PM| Peak
+8:00 PM| Off-peak
+Exactly Rs 50 remaining| Allowed
+Unknown zone| Rejected
+Negative recharge| Rejected
+Invalid hour input| Rejected
+
+6. Five-Journey Calculation
+
+Rs 10 + Rs 24 + Rs 30 + Rs 12 + Rs 36
+
+Total = Rs 112.00
+
+7. Alternative Concept and Complexity Analysis
+
+Instead of separate hand-written test cases, a table of test inputs and expected outputs can be created.
+
+A loop processes every test case and compares the actual result with the expected result.
+
+- Time complexity: O(t), where t is the number of tests.
+- Space complexity: O(t), for storing the test table.
+
+A new boundary test can easily be added by inserting another test case.
+
+8. Conclusion
+
+The metro smart-card fare system calculates fares using integer paise and applies the peak surcharge correctly. It checks the minimum balance before allowing a journey. Boundary conditions and invalid inputs are considered to improve reliability.
