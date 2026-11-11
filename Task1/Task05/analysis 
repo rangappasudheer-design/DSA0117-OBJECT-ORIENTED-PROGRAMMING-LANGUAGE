@@ -1,0 +1,109 @@
+
+# Task05 – Static Members and Arrays of Objects
+
+## Aim
+To understand static data members, static member functions,
+constructors and arrays of objects in C++.
+
+## Concepts Used
+
+1. Static data members
+2. Static member functions
+3. Constructor
+4. Arrays of objects
+5. Accessing shared class data
+6. Scope resolution operator
+
+## Explanation
+
+A static data member belongs to the entire class rather than
+to an individual object. Only one copy is shared by all objects.
+
+In the Token class, the static variable next starts at 100.
+Every constructor call increments it.
+
+Three Token objects are created in the array and one extra
+Token object is created. Therefore, the constructor runs
+four times.
+
+The IDs are 101, 102, 103 and 104.
+
+The output is:
+101 103 104 4
+
+The static variable is defined outside the class using:
+
+int Token::next = 100;
+
+## BusTicket Explanation
+
+The BusTicket class has a static variable named issued.
+It stores the number of seats already allocated.
+
+The bus capacity is 3.
+
+TODO 1:
+If issued is less than CAPACITY, the counter is increased
+and the new value is assigned as the seat number.
+Otherwise, seat remains 0 and the passenger is placed
+on the waiting list.
+
+TODO 2:
+The static count() function returns issued.
+
+## Expected Ticket Allocation
+
+Asha receives Seat 1.
+Bala receives Seat 2.
+Chitra receives Seat 3.
+Dev is placed on the waiting list.
+
+Total seats issued: 3.
+
+## Why Use Static Members?
+
+Static members are useful when information must be shared
+among all objects of a class.
+
+A static member function does not have a this pointer.
+It cannot directly access non-static data members because
+it does not belong to one particular object.
+
+## Array of Objects
+
+BusTicket trip[4] creates four BusTicket objects.
+Each object is initialized with a passenger name.
+
+The range-based for loop visits and prints each ticket.
+
+## Alternative Concept
+
+A global variable could store the issued seat count, but
+it would be less encapsulated.
+
+A separate TicketOffice object could manage the counter.
+That design is useful when multiple buses need independent
+seat counts.
+
+A single static counter is suitable when all tickets belong
+to the same bus.
+
+## Complexity Analysis
+
+Time complexity:
+- Creating one ticket: O(1)
+- Checking and assigning a seat: O(1)
+- Printing one ticket: O(1)
+- Processing n tickets: O(n)
+
+Space complexity:
+- Shared counter: O(1)
+- One ticket object: O(1)
+- Array of n ticket objects: O(n)
+
+## Conclusion
+
+The program demonstrates static data members, static
+member functions, constructors and arrays of objects.
+The first three passengers receive seats, while the
+fourth passenger is placed on the waiting list.
