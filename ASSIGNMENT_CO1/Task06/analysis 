@@ -1,0 +1,9 @@
+Feature Switch Array
+Time complexity O(1) O(1)
+Space complexity O(1) O(3)
+Readability Good Simple
+Adding fourth zone Add another case Add another element
+Error handling Default case Index validation
+Both approaches have constant-time fare selection. An array is convenient when additional zones are introduced.
+10. Conclusion
+Control structures play an important role in developing the Namma Metro Smart-Card Fare System. The if–else statement checks conditions, the switch statement selects the correct zone fare, and loops process multiple journeys.
