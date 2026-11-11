@@ -1,0 +1,38 @@
+METRO SMART CARD - DATA TYPE ANALYSIS
+-------------------------------------
+Size of bool: 1 bytes
+Size of char: 1 bytes
+Size of int: 4 bytes
+Size of long long: 8 bytes
+Size of unsigned int: 4 bytes
+Size of float: 4 bytes
+Size of double: 8 bytes
+Size of auto variable: 8 bytes
+
+METRO DATA VALUES
+Peak Hour: true
+Zone Code: O
+Hour: 8
+Balance: Rs 100
+Zone Number: 3
+Temperature: 25.5
+Fare: Rs 30.5
+Journey Count: 3000000
+
+TYPE COMPATIBILITY
+Integer + Double: 9.5
+Integer to Boolean: true
+
+INTEGER LIMITS
+INT_MAX: 2147483647
+INT_MIN: -2147483648
+LLONG_MAX: 9223372036854775807
+
+NETWORK COLLECTION
+Total journeys: 3000000
+Maximum fare per journey: 3600 paise
+Total collection: Rs 108000000
+Does total exceed INT_MAX? true
+
+FLOATING POINT PRECISION
+Sum of 0.1 added 10 times: 0.99999999999999989
