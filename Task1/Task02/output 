@@ -1,0 +1,8 @@
+Original marks: 75 82 91 68 88
+Highest mark: 91
+After moderation: 75 82 93 68 88
+Const reference result: 93
+Copy result: 93
+Before vector growth: 90
+Vector size after growth: 4
+Do not use ref after possible reallocation.
