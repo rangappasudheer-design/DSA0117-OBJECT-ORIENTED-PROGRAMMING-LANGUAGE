@@ -1,0 +1,6 @@
+Expected results
+Total in rupees Does int hold paise total?
+Rs 720,000.00 Yes
+Rs 18,000,000.00 Yes
+Rs 108,000,000.00 No
+For this test fare of Rs 3
