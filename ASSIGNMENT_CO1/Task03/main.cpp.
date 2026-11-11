@@ -1,0 +1,88 @@
+
+#include <iostream>
+#include <iomanip>
+#include <climits>
+using namespace std;
+
+int main()
+{
+    // 1. Different data types
+    bool peakHour = true;
+    char zoneCode = 'O';
+    int hour = 8;
+    long long balancePaise = 10000;
+    unsigned int zoneNumber = 3;
+    float temperature = 25.5f;
+    double fareInRupees = 30.50;
+    auto journeyCount = 3000000LL;
+
+    // 2. Display sizes of data types
+    cout << "METRO SMART CARD - DATA TYPE ANALYSIS" << endl;
+    cout << "-------------------------------------" << endl;
+
+    cout << "Size of bool: " << sizeof(bool) << " bytes" << endl;
+    cout << "Size of char: " << sizeof(char) << " bytes" << endl;
+    cout << "Size of int: " << sizeof(int) << " bytes" << endl;
+    cout << "Size of long long: " << sizeof(long long) << " bytes" << endl;
+    cout << "Size of unsigned int: " << sizeof(unsigned int) << " bytes" << endl;
+    cout << "Size of float: " << sizeof(float) << " bytes" << endl;
+    cout << "Size of double: " << sizeof(double) << " bytes" << endl;
+    cout << "Size of auto variable: " << sizeof(journeyCount) << " bytes" << endl;
+
+    // 3. Display variable values
+    cout << "\nMETRO DATA VALUES" << endl;
+
+    cout << "Peak Hour: " << boolalpha << peakHour << endl;
+    cout << "Zone Code: " << zoneCode << endl;
+    cout << "Hour: " << hour << endl;
+    cout << "Balance: Rs " << balancePaise / 100.0 << endl;
+    cout << "Zone Number: " << zoneNumber << endl;
+    cout << "Temperature: " << temperature << endl;
+    cout << "Fare: Rs " << fareInRupees << endl;
+    cout << "Journey Count: " << journeyCount << endl;
+
+    // 4. Type compatibility
+    int a = 7;
+    double b = 2.5;
+    double result = a + b;
+
+    bool flag = 5;
+
+    cout << "\nTYPE COMPATIBILITY" << endl;
+    cout << "Integer + Double: " << result << endl;
+    cout << "Integer to Boolean: " << boolalpha << flag << endl;
+
+    // 5. Integer limits
+    cout << "\nINTEGER LIMITS" << endl;
+    cout << "INT_MAX: " << INT_MAX << endl;
+    cout << "INT_MIN: " << INT_MIN << endl;
+    cout << "LLONG_MAX: " << LLONG_MAX << endl;
+
+    // 6. Network collection calculation
+    long long journeys = 3000000LL;
+    long long maximumFare = 3600LL;
+
+    long long totalPaise = journeys * maximumFare;
+
+    cout << "\nNETWORK COLLECTION" << endl;
+    cout << "Total journeys: " << journeys << endl;
+    cout << "Maximum fare per journey: " << maximumFare << " paise" << endl;
+    cout << "Total collection: Rs " << totalPaise / 100 << endl;
+
+    cout << "Does total exceed INT_MAX? "
+         << boolalpha << (totalPaise > INT_MAX) << endl;
+
+    // 7. Floating-point precision demonstration
+    double sum = 0.0;
+
+    for (int i = 0; i < 10; i++)
+    {
+        sum += 0.1;
+    }
+
+    cout << "\nFLOATING POINT PRECISION" << endl;
+    cout << setprecision(17);
+    cout << "Sum of 0.1 added 10 times: " << sum << endl;
+
+    return 0;
+}
