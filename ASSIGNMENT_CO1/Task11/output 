@@ -1,0 +1,17 @@
+FINAL METRO FARE SYSTEM
+------------------------------
+
+Inner Off-Peak
+Fare: Rs 10.00
+Journey: Allowed
+Remaining balance: Rs 90.00
+
+Outer Peak
+Fare: Rs 36.00
+Journey: Allowed
+Remaining balance: Rs 54.00
+
+Middle Off-Peak
+Fare: Rs 20.00
+Journey: Denied
+Remaining balance: Rs 54.00
