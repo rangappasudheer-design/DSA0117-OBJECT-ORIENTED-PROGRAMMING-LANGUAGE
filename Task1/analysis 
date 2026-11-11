@@ -1,0 +1,122 @@
+
+# Task06 – Friend Functions and Inline Functions
+
+## Aim
+To understand friend functions and inline functions in C++,
+and use them to compare two Time objects.
+
+## Concepts Used
+1. Classes and private data members
+2. Friend functions
+3. Inline functions
+4. Const reference parameters
+5. Time comparison
+6. Absolute difference
+
+## Explanation
+
+The Time class contains two private members:
+- h: stores hours
+- m: stores minutes
+
+The constructor initializes these members.
+
+### Friend Function
+
+A friend function is not a member of the class, but it is
+allowed to access the private and protected members of the class.
+
+The functions minutesBetween() and earlier() are declared
+as friends inside the Time class.
+
+They receive two Time objects using const references.
+This avoids copying the objects and prevents modification.
+
+### TODO 1 – minutesBetween()
+
+Each time is converted into total minutes:
+
+total minutes = hours * 60 + minutes
+
+The absolute difference is returned using abs().
+
+### TODO 2 – earlier()
+
+The hours are compared first.
+If the hours are equal, the minutes are compared.
+
+The function returns true when the first time is earlier.
+
+## Expected Results
+
+9:45 and 13:10:
+Difference = 205 minutes.
+
+Same time (12:30 and 12:30):
+Difference = 0 minutes.
+Earlier result = false.
+
+11:50 and 12:10:
+Difference = 20 minutes.
+Earlier result = true.
+
+## Why Friend Functions?
+
+Both functions compare two Time objects equally.
+A friend function can access private members of both objects.
+
+A member function would normally be called using an object,
+for example departure.minutesTo(arrival).
+
+A friend function is called like an ordinary function:
+minutesBetween(departure, arrival).
+
+## Inline Functions
+
+The inline keyword suggests that the compiler may replace
+a function call with the function body.
+
+This can reduce function-call overhead for small functions.
+However, the compiler decides whether to inline the function.
+
+The keyword does not guarantee that inlining will happen.
+
+## What If Members Were Public?
+
+Public members would allow outside code to change hours
+and minutes directly. This weakens encapsulation.
+
+Keeping the members private protects the class data.
+
+## Alternative Design
+
+The functions could instead be member functions:
+
+departure.minutesBetween(arrival)
+departure.earlier(arrival)
+
+Another option is to provide public getter functions.
+The comparison logic could then use the getters without
+declaring friend functions.
+
+Friend functions are reasonable here because both Time
+objects are treated equally.
+
+## Complexity Analysis
+
+For minutesBetween():
+Time complexity: O(1)
+Space complexity: O(1)
+
+For earlier():
+Time complexity: O(1)
+Space complexity: O(1)
+
+Both functions perform a fixed number of operations.
+
+## Conclusion
+
+The program demonstrates how friend functions can access
+private class data and how inline functions may reduce
+function-call overhead. The test cases verify normal,
+identical and noon-crossing times.
