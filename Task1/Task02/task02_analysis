@@ -1,0 +1,101 @@
+
+# Task 02 – Return by Reference and Its Dangers
+
+## Aim
+To understand returning references from functions and the dangers of dangling references.
+
+## 1. Return by Reference
+The highestMark() function returns a reference to the highest element in the marks array.
+
+This allows the caller to modify the original array element directly.
+
+Example:
+highestMark(marks, 5) += 2;
+
+The highest mark changes from 91 to 93.
+
+## 2. Dangling Reference
+A dangling reference occurs when a function returns a reference to a local variable.
+
+Example:
+int& dangerousFunction()
+{
+    int value = 50;
+    return value;
+}
+
+The local variable is destroyed when the function ends. Therefore, the returned reference is invalid.
+
+Using it causes undefined behaviour.
+
+Compiler command:
+g++ -std=c++17 -Wall -Wextra -Wreturn-local-addr main.cpp -o task02
+
+The compiler may issue a warning about returning a reference to a local variable.
+
+## 3. Reference, Const Reference and Copy
+
+Reference:
+Returns the original variable and allows modification.
+
+Const Reference:
+Returns the original variable but prevents modification through that reference.
+
+Copy:
+Returns a separate value. Changes to the copy do not affect the original array.
+
+## 4. Vector Reallocation
+A vector can increase its capacity when new elements are inserted.
+
+During reallocation, existing elements may move to a new memory location. References obtained before reallocation can become invalid.
+
+Therefore, references should not be used after an operation that may reallocate the vector.
+
+## 5. Alternative Concept
+
+Using an index:
+
+int highestIndex(const int marks[], int size)
+{
+    int highest = 0;
+
+    for (int i = 1; i < size; i++)
+    {
+        if (marks[i] > marks[highest])
+            highest = i;
+    }
+
+    return highest;
+}
+
+Calling code:
+int index = highestIndex(marks, 5);
+marks[index] += 2;
+
+Using a pointer:
+int* highestPointer = &marks[index];
+*highestPointer += 2;
+
+## 6. Complexity Analysis
+
+Finding the highest mark:
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Returning by reference:
+O(1) additional parameter/return overhead.
+
+Returning by copy:
+O(1) for an integer.
+
+Returning an index:
+O(1) return overhead.
+
+Returning a pointer:
+O(1) return overhead.
+
+The search itself takes O(n) in every approach.
+
+## Result
+The program demonstrates returning a reference to an array element, modifying the highest mark, and understanding the risks of dangling references and vector reallocation.
