@@ -1,0 +1,24 @@
+METRO SMART CARD FARE SYSTEM
+----------------------------
+
+Inner Off Peak       Fare: Rs 10.00  Allowed
+Inner Peak           Fare: Rs 12.00  Allowed
+Middle Off Peak      Fare: Rs 20.00  Allowed
+Middle Peak          Fare: Rs 24.00  Allowed
+Outer Off Peak       Fare: Rs 30.00  Allowed
+Outer Peak           Fare: Rs 36.00  Allowed
+
+BOUNDARY TESTS
+8:00 - Peak
+10:00 - Off Peak
+17:00 - Peak
+20:00 - Off Peak
+
+BALANCE TEST
+Initial Balance: Rs 60.00
+Fare: Rs 10.00
+Journey Allowed
+Remaining Balance: Rs 50.00
+
+FIVE JOURNEY TOTAL
+Total Fare: Rs 112.00
