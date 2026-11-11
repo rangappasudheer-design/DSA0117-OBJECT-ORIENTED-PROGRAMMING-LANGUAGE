@@ -1,0 +1,102 @@
+TASK 11 – RECOMMEND AND DEFEND THE FINAL DESIGN
+
+1. Introduction
+
+The final metro smart-card system should calculate fares accurately, apply peak-hour surcharges and prevent journeys when the remaining card balance would be below Rs 50.
+
+I recommend using C++ object-oriented programming with a SmartCard class, enum class, constexpr constants and integer paise.
+
+2. Recommended Data Types
+
+Data| Recommended type| Reason
+Metro zone| enum class| Represents valid zones
+Base fare| long long| Stores money in paise
+Card balance| long long| Prevents small-range limitations
+Peak-hour status| bool| Stores true or false
+Hour| int| Represents 0–23
+Surcharge| constexpr int| Defines 20% in one place
+Fare table| std::array| Stores the three zone fares
+
+3. Recommended Constants
+
+constexpr int PEAK_SURCHARGE_PERCENT = 20;
+constexpr long long MIN_BALANCE_PAISE = 5000;
+
+The base fares are stored in one array:
+
+constexpr array<long long, 3> BASE_FARE = {
+    1000, 2000, 3000
+};
+
+This avoids repeating fare values throughout the program.
+
+4. Recommended Classes
+
+SmartCard class
+
+The SmartCard class stores the card balance as a private data member.
+
+Its functions are:
+
+- "canTravel()" – Checks whether the journey is permitted.
+- "deduct()" – Deducts the fare only when the journey is allowed.
+- "getBalance()" – Returns the current balance.
+
+Encapsulation protects the balance from direct modification by other parts of the program.
+
+Zone representation
+
+The "enum class Zone" represents Inner, Middle and Outer zones. It avoids using unexplained numeric values.
+
+5. How a Fare Revision Will Be Carried Out
+
+If the Inner-zone fare changes from Rs 10 to Rs 12, the corresponding value in the fare table is changed from 1000 to 1200 paise.
+
+If the peak surcharge changes, the "PEAK_SURCHARGE_PERCENT" constant is updated.
+
+This centralised approach makes revisions easier and reduces the chance of inconsistent fare values.
+
+6. Limitations of the Design
+
+1. The current fare table supports only three zones.
+2. The fare table is compiled into the program.
+3. Student and senior-citizen concession percentages are not specified in the assignment, so they are not implemented in this example.
+4. A real metro system would need additional features such as transaction records, secure card communication and persistent balance storage.
+
+7. Suitability for the Whole Network
+
+The design uses "long long" for monetary totals and balances. This is more suitable than "int" for large network totals.
+
+Task 10 demonstrated that a total of 10,800,000,000 paise exceeds the typical 32-bit signed int limit.
+
+Each fare calculation and card-balance check takes O(1) time. Processing n journeys takes O(n) time.
+
+8. Alternative Concept: Configuration File
+
+Instead of storing fares as compiled constants, the program could read the fare table from a configuration file when it starts.
+
+For z zones:
+
+- Start-up reading time: O(z).
+- Storage for the fare table: O(z).
+- Fare lookup after loading: O(1).
+
+Comparison
+
+Compiled fare table| Configuration file
+Fare changes require recompilation| Fare changes can be made in the file
+No file-reading step at start-up| Requires file-reading and validation
+Simple deployment| More flexible fare management
+Values checked during compilation| File contents must be validated
+
+For a small fixed system, a constexpr fare table is simple and reliable. For a large metro network with frequent fare revisions, a validated configuration file is more flexible.
+
+9. Final Recommendation
+
+I recommend retaining the SmartCard class and integer-paise calculations, while keeping all fare values and rules centralised.
+
+The design is understandable, maintainable and suitable for the current three-zone requirements. For future expansion, the fare table can be loaded from a validated configuration file and extended to support additional zones and concession rules.
+
+10. Conclusion
+
+The recommended design combines encapsulation, enum class, constexpr constants and integer arithmetic. It prevents invalid balance deductions and supports accurate fare calculation. The design is appropriate for the current assignment requirements, with configuration-based fare management recommended for future network expansion.
