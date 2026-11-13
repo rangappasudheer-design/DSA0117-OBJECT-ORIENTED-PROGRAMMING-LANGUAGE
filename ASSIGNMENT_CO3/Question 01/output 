@@ -1,0 +1,25 @@
+Default Constructor:
+Book ID: 0
+Title: Unknown
+Copies: 0
+-------------------
+Parameterized Constructor:
+Book ID: 101
+Title: C++ Programming
+Copies: 5
+-------------------
+Donated Book Constructor:
+Book ID: 0
+Title: Data Structures
+Copies: 1
+-------------------
+Overloaded Constructor:
+Book ID: 0
+Title: Java Programming
+Copies: 3
+-------------------
+Negative Copies Test:
+Book ID: 102
+Title: Invalid Book
+Copies: 0
+-------------------
