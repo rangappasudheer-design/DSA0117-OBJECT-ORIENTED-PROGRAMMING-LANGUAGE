@@ -1,0 +1,26 @@
+Stack Object:
+Auditorium Created
+Seat Booked
+Seat Map:
+O X O
+O O O
+
+Block Object:
+Auditorium Created
+Seat Booked
+Seat Map:
+O O
+O X
+Auditorium Destroyed
+
+Heap Object:
+Auditorium Created
+Seat Booked
+Seat Map:
+X O O
+O O O
+O O O
+Auditorium Destroyed
+
+Program End
+Auditorium Destroyed
