@@ -1,0 +1,13 @@
+Resistor Impedance: 10.0000 + j0.0000
+Inductor Impedance: 0.0000 + j31.4159
+Capacitor Impedance: 0.0000 - j31.8310
+
+Series Impedance: 10.0000 - j0.4151
+Series Magnitude: 10.0086 ohms
+
+Parallel Impedance: 9.9998 + j0.0415
+Parallel Magnitude: 9.9999 ohms
+
+Equality Test: true
+
+Zero Division Test: Division by zero impedance!
