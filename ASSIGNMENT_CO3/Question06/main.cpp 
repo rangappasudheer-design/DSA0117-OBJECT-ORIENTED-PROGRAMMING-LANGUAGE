@@ -1,0 +1,99 @@
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class Text {
+private:
+    char* data;
+
+public:
+    // Constructor
+    Text(const char* str = "") {
+        if (str == nullptr)
+            str = "";
+
+        data = new char[strlen(str) + 1];
+        strcpy(data, str);
+    }
+
+    // Copy constructor
+    Text(const Text& other) {
+        data = new char[strlen(other.data) + 1];
+        strcpy(data, other.data);
+    }
+
+    // Copy assignment operator
+    Text& operator=(const Text& other) {
+        if (this != &other) {
+            char* temp = new char[strlen(other.data) + 1];
+            strcpy(temp, other.data);
+
+            delete[] data;
+            data = temp;
+        }
+        return *this;
+    }
+
+    // Destructor
+    ~Text() {
+        delete[] data;
+    }
+
+    // Concatenation operator
+    Text operator+(const Text& other) const {
+        size_t n1 = strlen(data);
+        size_t n2 = strlen(other.data);
+
+        char* temp = new char[n1 + n2 + 1];
+
+        strcpy(temp, data);
+        strcat(temp, other.data);
+
+        Text result(temp);
+        delete[] temp;
+
+        return result;
+    }
+
+    // Equality operator
+    bool operator==(const Text& other) const {
+        return strcmp(data, other.data) == 0;
+    }
+
+    // Inequality operator
+    bool operator!=(const Text& other) const {
+        return !(*this == other);
+    }
+
+    // Stream insertion operator
+    friend ostream& operator<<(ostream& out, const Text& t) {
+        out << t.data;
+        return out;
+    }
+};
+
+int main() {
+    Text a("Hello ");
+    Text b("World");
+    Text c("");
+
+    Text result = a + b;
+
+    cout << "Message: " << result << endl;
+
+    cout << "a == b: " << (a == b) << endl;
+    cout << "a != b: " << (a != b) << endl;
+
+    Text copy = result;
+    cout << "Copied message: " << copy << endl;
+
+    // Self-assignment test
+    result = result;
+    cout << "After self-assignment: " << result << endl;
+
+    // Empty message test
+    cout << "Empty message: [" << c << "]" << endl;
+
+    return 0;
+}
