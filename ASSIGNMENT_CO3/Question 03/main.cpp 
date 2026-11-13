@@ -1,0 +1,116 @@
+
+#include <iostream>
+using namespace std;
+
+class Auditorium {
+private:
+    int rows;
+    int seats;
+    char** seatMap;
+
+public:
+    // Dynamic constructor
+    Auditorium(int r, int s)
+        : rows(r > 0 ? r : 0),
+          seats(s > 0 ? s : 0),
+          seatMap(nullptr) {
+
+        if (rows > 0 && seats > 0) {
+            seatMap = new char*[rows];
+
+            for (int i = 0; i < rows; i++) {
+                seatMap[i] = new char[seats];
+
+                for (int j = 0; j < seats; j++) {
+                    seatMap[i][j] = 'O';
+                }
+            }
+        }
+
+        cout << "Auditorium Created" << endl;
+    }
+
+    // Book a seat
+    void bookSeat(int r, int s) {
+        if (r >= 0 && r < rows &&
+            s >= 0 && s < seats) {
+
+            if (seatMap[r][s] == 'O') {
+                seatMap[r][s] = 'X';
+                cout << "Seat Booked" << endl;
+            } else {
+                cout << "Seat Already Booked" << endl;
+            }
+        } else {
+            cout << "Invalid Seat" << endl;
+        }
+    }
+
+    // Cancel a seat
+    void cancelSeat(int r, int s) {
+        if (r >= 0 && r < rows &&
+            s >= 0 && s < seats) {
+
+            seatMap[r][s] = 'O';
+            cout << "Booking Cancelled" << endl;
+        } else {
+            cout << "Invalid Seat" << endl;
+        }
+    }
+
+    // Display seats
+    void display() const {
+        cout << "Seat Map:" << endl;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < seats; j++) {
+                cout << seatMap[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+
+    // Destructor
+    ~Auditorium() {
+        if (seatMap != nullptr) {
+            for (int i = 0; i < rows; i++) {
+                delete[] seatMap[i];
+            }
+
+            delete[] seatMap;
+        }
+
+        cout << "Auditorium Destroyed" << endl;
+    }
+};
+
+int main() {
+
+    cout << "Stack Object:" << endl;
+
+    Auditorium a1(2, 3);
+
+    a1.bookSeat(0, 1);
+    a1.display();
+
+    cout << "\nBlock Object:" << endl;
+
+    {
+        Auditorium a2(2, 2);
+        a2.bookSeat(1, 1);
+        a2.display();
+    }
+
+    cout << "\nHeap Object:" << endl;
+
+    Auditorium* a3 = new Auditorium(3, 3);
+
+    a3->bookSeat(0, 0);
+    a3->display();
+
+    delete a3;
+
+    cout << "\nProgram End" << endl;
+
+    return 0;
+}
