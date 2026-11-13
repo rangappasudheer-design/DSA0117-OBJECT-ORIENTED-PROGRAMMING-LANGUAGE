@@ -1,0 +1,6 @@
+Message: Hello World
+a == b: 0
+a != b: 1
+Copied message: Hello World
+After self-assignment: Hello World
+Empty message: []
