@@ -1,0 +1,141 @@
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdexcept>
+using namespace std;
+
+class Time {
+private:
+    int hours, minutes, seconds;
+
+public:
+    Time(int h = 0, int m = 0, int s = 0)
+        : hours(h), minutes(m), seconds(s) {
+        normalize();
+    }
+
+    void normalize() {
+        int total = hours * 3600 + minutes * 60 + seconds;
+
+        if (total < 0)
+            total = 0;
+
+        hours = total / 3600;
+        minutes = (total % 3600) / 60;
+        seconds = total % 60;
+    }
+
+    // Prefix increment
+    Time& operator++() {
+        seconds++;
+        normalize();
+        return *this;
+    }
+
+    // Postfix increment
+    Time operator++(int) {
+        Time old = *this;
+        ++(*this);
+        return old;
+    }
+
+    // Equality operator
+    bool operator==(const Time& t) const {
+        return hours == t.hours &&
+               minutes == t.minutes &&
+               seconds == t.seconds;
+    }
+
+    // Less than operator
+    bool operator<(const Time& t) const {
+        int a = hours * 3600 + minutes * 60 + seconds;
+        int b = t.hours * 3600 + t.minutes * 60 + t.seconds;
+
+        return a < b;
+    }
+
+    void display() const {
+        cout << hours << ":"
+             << minutes << ":"
+             << seconds << endl;
+    }
+};
+
+class Playlist {
+private:
+    vector<string> tracks;
+
+public:
+    Playlist() {
+        tracks = {
+            "Song One",
+            "Song Two",
+            "Song Three"
+        };
+    }
+
+    // Non-const subscript operator
+    string& operator[](int index) {
+        if (index < 0 || index >= (int)tracks.size())
+            throw out_of_range("Invalid playlist index");
+
+        return tracks[index];
+    }
+
+    // Const subscript operator
+    const string& operator[](int index) const {
+        if (index < 0 || index >= (int)tracks.size())
+            throw out_of_range("Invalid playlist index");
+
+        return tracks[index];
+    }
+
+    int size() const {
+        return (int)tracks.size();
+    }
+};
+
+int main() {
+    cout << "Time Increment:" << endl;
+
+    Time t(0, 0, 59);
+
+    Time a = t++;
+    Time b = ++t;
+
+    cout << "a = ";
+    a.display();
+
+    cout << "b = ";
+    b.display();
+
+    cout << "Current Time = ";
+    t.display();
+
+    cout << "\nTime Comparison:" << endl;
+
+    Time x(1, 0, 0);
+    Time y(1, 0, 1);
+
+    cout << boolalpha;
+    cout << "x == y: " << (x == y) << endl;
+    cout << "x < y: " << (x < y) << endl;
+
+    cout << "\nPlaylist:" << endl;
+
+    Playlist p;
+
+    for (int i = 0; i < p.size(); i++) {
+        cout << p[i] << endl;
+    }
+
+    try {
+        cout << p[5] << endl;
+    }
+    catch (const out_of_range& e) {
+        cout << e.what() << endl;
+    }
+
+    return 0;
+}
