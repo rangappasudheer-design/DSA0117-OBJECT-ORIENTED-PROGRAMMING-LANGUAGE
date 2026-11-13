@@ -1,0 +1,145 @@
+
+#include <iostream>
+#include <cmath>
+#include <stdexcept>
+#include <iomanip>
+using namespace std;
+
+class Complex {
+private:
+    double real;
+    double imag;
+
+public:
+    // Default constructor
+    Complex() : real(0), imag(0) {}
+
+    // Constructor with real part
+    Complex(double r) : real(r), imag(0) {}
+
+    // Constructor with real and imaginary parts
+    Complex(double r, double i) : real(r), imag(i) {}
+
+    // Addition
+    Complex operator+(const Complex& c) const {
+        return Complex(real + c.real, imag + c.imag);
+    }
+
+    // Subtraction
+    Complex operator-(const Complex& c) const {
+        return Complex(real - c.real, imag - c.imag);
+    }
+
+    // Multiplication
+    Complex operator*(const Complex& c) const {
+        return Complex(
+            real * c.real - imag * c.imag,
+            real * c.imag + imag * c.real
+        );
+    }
+
+    // Division
+    Complex operator/(const Complex& c) const {
+        double denominator =
+            c.real * c.real + c.imag * c.imag;
+
+        if (denominator == 0) {
+            throw runtime_error("Division by zero impedance!");
+        }
+
+        return Complex(
+            (real * c.real + imag * c.imag) / denominator,
+            (imag * c.real - real * c.imag) / denominator
+        );
+    }
+
+    // Equality
+    bool operator==(const Complex& c) const {
+        const double EPS = 1e-9;
+
+        return fabs(real - c.real) < EPS &&
+               fabs(imag - c.imag) < EPS;
+    }
+
+    // Magnitude
+    double magnitude() const {
+        return sqrt(real * real + imag * imag);
+    }
+
+    // Display
+    friend ostream& operator<<(ostream& out,
+                               const Complex& c) {
+        out << fixed << setprecision(4)
+            << c.real;
+
+        if (c.imag >= 0)
+            out << " + j" << c.imag;
+        else
+            out << " - j" << fabs(c.imag);
+
+        return out;
+    }
+};
+
+// Parallel impedance of two components
+Complex parallel(Complex z1, Complex z2) {
+    return (z1 * z2) / (z1 + z2);
+}
+
+int main() {
+    try {
+        const double PI = 3.141592653589793;
+        double frequency = 50.0;
+        double R = 10.0;
+        double L = 0.1;
+        double C = 100e-6;
+
+        double omega = 2 * PI * frequency;
+
+        // Individual impedances
+        Complex ZR(R, 0);
+        Complex ZL(0, omega * L);
+        Complex ZC(0, -1 / (omega * C));
+
+        cout << "Resistor Impedance: " << ZR << endl;
+        cout << "Inductor Impedance: " << ZL << endl;
+        cout << "Capacitor Impedance: " << ZC << endl;
+
+        // Series RLC circuit
+        Complex series = ZR + ZL + ZC;
+
+        cout << "\nSeries Impedance: " << series << endl;
+        cout << "Series Magnitude: "
+             << series.magnitude() << " ohms" << endl;
+
+        // Parallel RLC circuit
+        Complex parallelRL = parallel(ZR, ZL);
+        Complex parallelRLC = parallel(parallelRL, ZC);
+
+        cout << "\nParallel Impedance: "
+             << parallelRLC << endl;
+
+        cout << "Parallel Magnitude: "
+             << parallelRLC.magnitude()
+             << " ohms" << endl;
+
+        // Test equality
+        Complex x(5, 3);
+        Complex y(5, 3);
+
+        cout << "\nEquality Test: "
+             << boolalpha << (x == y) << endl;
+
+        // Test division by zero
+        Complex zero(0, 0);
+
+        cout << "\nZero Division Test: ";
+        Complex answer = x / zero;
+        cout << answer << endl;
+    }
+    catch (const exception& e) {
+        cout << e.what() << endl;
+    }
+
+    return 0;
+}
