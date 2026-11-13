@@ -1,0 +1,14 @@
+Time Increment:
+a = 0:0:59
+b = 0:1:1
+Current Time = 0:1:1
+
+Time Comparison:
+x == y: false
+x < y: true
+
+Playlist:
+Song One
+Song Two
+Song Three
+Invalid playlist index
