@@ -1,0 +1,22 @@
+HOSPITAL BILLING SYSTEM
+-----------------------
+
+Bill Type: Outpatient
+Patient: Ravi
+Total Bill: Rs. 1700
+Self Pay Covers: Rs. 1700
+Corporate Covers: Rs. 1190
+
+Bill Type: Inpatient
+Patient: Meena
+Total Bill: Rs. 47500
+Self Pay Covers: Rs. 47500
+Corporate Covers: Rs. 30000
+
+Bill Type: Emergency
+Patient: Kumar
+Total Bill: Rs. 8000
+Self Pay Covers: Rs. 8000
+Corporate Covers: Rs. 5600
+
+Program completed successfully.
