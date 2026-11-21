@@ -1,0 +1,8 @@
+HOSPITAL BILLING SYSTEM
+-----------------------
+Outpatient | Bill No: 101 | Patient: Ravi | Amount: 1700
+Inpatient | Bill No: 102 | Patient: Meena | Amount: 40000
+Day-care | Bill No: 103 | Patient: Arun | Amount: 15000
+Emergency | Bill No: 104 | Patient: Kumar | Amount: 8000
+-----------------------
+Daily Total: 64700
