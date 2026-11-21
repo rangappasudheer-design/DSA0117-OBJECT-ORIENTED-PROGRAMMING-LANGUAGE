@@ -1,0 +1,53 @@
+
+#include <iostream>
+#include <vector>
+#include <memory>
+using namespace std;
+
+// Base class
+class Account {
+public:
+
+    // Non-virtual function
+    double rate() const {
+        return 3.5;
+    }
+
+    // Virtual function
+    virtual double vrate() const {
+        return 3.5;
+    }
+
+    // Virtual destructor
+    virtual ~Account() = default;
+};
+
+// Derived class
+class SeniorAccount : public Account {
+public:
+
+    double rate() const {
+        return 4.0;
+    }
+
+    double vrate() const override {
+        return 4.0;
+    }
+};
+
+int main() {
+
+    vector<unique_ptr<Account>> accounts;
+
+    accounts.push_back(make_unique<Account>());
+    accounts.push_back(make_unique<SeniorAccount>());
+
+    cout << "BANK ACCOUNT SYSTEM" << endl;
+    cout << "-------------------" << endl;
+
+    for (const auto& a : accounts) {
+        cout << "Interest Rate: " << a->vrate() << "%" << endl;
+    }
+
+    return 0;
+}
