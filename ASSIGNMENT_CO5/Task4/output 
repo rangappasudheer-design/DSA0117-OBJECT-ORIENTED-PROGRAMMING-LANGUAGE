@@ -1,0 +1,7 @@
+HOSPITAL BILLING SYSTEM
+-----------------------
+Error: Negative bill amount
+Error: Claim exceeds insurance limit
+Error: Unknown package
+Error: Patient record not found
+Program completed successfully
