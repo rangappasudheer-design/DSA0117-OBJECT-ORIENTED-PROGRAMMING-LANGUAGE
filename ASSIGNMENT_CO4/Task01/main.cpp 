@@ -1,0 +1,109 @@
+
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+// Base class
+class Staff {
+protected:
+    string name;
+    int id;
+    double basic;
+
+    static constexpr double DA_RATE = 0.42;
+
+public:
+    Staff(string n, int i, double b) {
+        name = n;
+        id = i;
+        basic = b;
+    }
+
+    virtual double pay() const = 0;
+
+    virtual void display() const {
+        cout << "Name: " << name << endl;
+        cout << "ID: " << id << endl;
+        cout << "Salary: " << pay() << endl;
+    }
+
+    virtual ~Staff() {}
+};
+
+// Derived class 1
+class Professor : public Staff {
+private:
+    double research;
+
+public:
+    Professor(string n, int i, double b, double r)
+        : Staff(n, i, b) {
+        research = r;
+    }
+
+    double pay() const override {
+        return basic + basic * DA_RATE + research;
+    }
+};
+
+// Derived class 2
+class LabAssistant : public Staff {
+public:
+    LabAssistant(string n, int i, double b)
+        : Staff(n, i, b) {}
+
+    double pay() const override {
+        return basic + basic * DA_RATE;
+    }
+};
+
+// Derived class 3
+class GuestFaculty : public Staff {
+private:
+    double hours;
+    double rate;
+
+public:
+    GuestFaculty(string n, int i, double h, double r)
+        : Staff(n, i, 0) {
+        hours = h;
+        rate = r;
+    }
+
+    double pay() const override {
+        return hours * rate;
+    }
+};
+
+// Main function
+int main() {
+
+    vector<Staff*> staffList;
+
+    staffList.push_back(
+        new Professor("Arun", 101, 50000, 10000)
+    );
+
+    staffList.push_back(
+        new LabAssistant("Kumar", 102, 30000)
+    );
+
+    staffList.push_back(
+        new GuestFaculty("Ravi", 103, 40, 500)
+    );
+
+    cout << "COLLEGE PAYROLL SYSTEM" << endl;
+    cout << "----------------------" << endl;
+
+    for (Staff* s : staffList) {
+        s->display();
+        cout << "----------------------" << endl;
+    }
+
+    for (Staff* s : staffList) {
+        delete s;
+    }
+
+    return 0;
+}
