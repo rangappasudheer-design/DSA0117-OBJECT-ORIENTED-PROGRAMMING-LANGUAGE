@@ -1,0 +1,45 @@
+===== VEHICLE RENTAL FLEET =====
+
+Bicycle | Registration: BIKE101 | Daily Rate: 100 | Status: Available
+
+Two Wheeler | Registration: BIKE202 | Daily Rate: 300 | Status: Available
+Fuel/Charge Level: 80% | Service Due: 2026-12-10
+
+Car | Registration: CAR303 | Daily Rate: 1500 | Status: Available
+Fuel/Charge Level: 70% | Service Due: 2026-12-15
+Seating Capacity: 5
+
+Electric Car | Registration: EV404 | Daily Rate: 2000 | Status: Available
+Fuel/Charge Level: 90% | Service Due: 2026-12-20
+Battery Capacity: 60 kWh
+
+Electric Bus | Registration: BUS505 | Daily Rate: 4000 | Status: Available
+Fuel/Charge Level: 85% | Service Due: 2026-12-25
+
+===== RENTING VEHICLES =====
+BIKE101 rented successfully.
+Rental Charge: Rs. 200
+
+BIKE202 rented successfully.
+Rental Charge: Rs. 800
+
+CAR303 rented successfully.
+Rental Charge: Rs. 3250
+
+EV404 rented successfully.
+Rental Charge: Rs. 4160
+
+BUS505 rented successfully.
+Rental Charge: Rs. 8500
+
+===== RETURNING VEHICLES =====
+BIKE101 returned successfully.
+Late fee: Rs. 0
+BIKE202 returned successfully.
+Late fee: Rs. 0
+CAR303 returned successfully.
+Late fee: Rs. 400
+EV404 returned successfully.
+Late fee: Rs. 0
+BUS505 returned successfully.
+Late fee: Rs. 0
